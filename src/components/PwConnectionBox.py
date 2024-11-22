@@ -21,7 +21,7 @@ class PwConnectionBox(Adw.PreferencesGroup):
         output_names = []
         for k, v in Pipewire.list_outputs().items():
             # Hardcoded, there as some issues with bluetooth mics for now
-            is_bluetooth = v.resource_name.startswith('bluez_output')
+            is_bluetooth = v.resource_name.startswith('bluez_output') or True
             if (v.alsa.startswith('alsa') or is_bluetooth):
                 if is_bluetooth or (('capture' in v.alsa) and (v.name != 'Midi Through')):
                     output_names.append(v.name)
@@ -35,7 +35,7 @@ class PwConnectionBox(Adw.PreferencesGroup):
         self.input_select.connect('change', self.on_input_select_change)
 
         for k, v in Pipewire.list_inputs().items():
-            is_bluetooth = v.resource_name.startswith('bluez_output')
+            is_bluetooth = v.resource_name.startswith('bluez_output') or True
             if (v.alsa.startswith('alsa') or is_bluetooth):
                 if is_bluetooth or (v.name != 'Midi Through'):
                     name = v.name if (v.name not in output_names) else (v.name + ' - Output')
