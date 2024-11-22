@@ -157,7 +157,7 @@ class WhisperWindow(Gtk.ApplicationWindow):
 
     def _is_supported_device(self, pw_list: dict[str, PwLink], link_id) -> Optional[PwLink]:
         for d, dev in pw_list.items():
-            if (link_id in dev.channels) and (dev.alsa.startswith('alsa:') \
+            if (link_id in dev.channels) and (dev.alsa.startswith('alsa') \
                 or dev.resource_name.startswith('bluez_output')) or \
                 LOW_LATENCY_NODE_NAME in dev.resource_name:
                 return dev
